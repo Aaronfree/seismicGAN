@@ -93,57 +93,6 @@ def discriminator(x, isTrain=True, reuse=False):
 
         return o, conv5, fea
 
-#fixed_z_ = np.random.normal(0, 1, (25, 1, 1, 100))
-# def show_result(num_epoch, show = False, save = False, path = 'result.png'):
-#     test_images = sess.run(G_z, {z: fixed_z_, isTrain: False})
-#
-#     size_figure_grid = 5
-#     fig, ax = plt.subplots(size_figure_grid, size_figure_grid, figsize=(5, 5))
-#     for i, j in itertools.product(range(size_figure_grid), range(size_figure_grid)):
-#         ax[i, j].get_xaxis().set_visible(False)
-#         ax[i, j].get_yaxis().set_visible(False)
-#
-#     for k in range(size_figure_grid*size_figure_grid):
-#         i = k // size_figure_grid
-#         j = k % size_figure_grid
-#         ax[i, j].cla()
-#         ax[i, j].imshow(np.reshape(test_images[k], (64, 64)), cmap='gray')
-#
-#     label = 'Epoch {0}'.format(num_epoch)
-#     fig.text(0.5, 0.04, label, ha='center')
-#
-#     if save:
-#         plt.savefig(path)
-#
-#     if show:
-#         plt.show()
-#     else:
-#         plt.close()
-
-# def show_train_hist(hist, show = False, save = False, path = 'Train_hist.png'):
-#     x = range(len(hist['D_losses']))
-#
-#     y1 = hist['D_losses']
-#     y2 = hist['G_losses']
-#
-#     plt.plot(x, y1, label='D_loss')
-#     plt.plot(x, y2, label='G_loss')
-#
-#     plt.xlabel('Epoch')
-#     plt.ylabel('Loss')
-#
-#     plt.legend(loc=4)
-#     plt.grid(True)
-#     plt.tight_layout()
-#
-#     if save:
-#         plt.savefig(path)
-#
-#     if show:
-#         plt.show()
-#     else:
-#         plt.close()
-
 # training paramet
 batch_size = 100
 lr = 0.0002
@@ -242,30 +191,6 @@ np.save('model_features_DCGANL5_FF.npy', features)
 ############################################################################################################################
 
 print("start cluster")
-# k = 6
-# centroides = tf.Variable(tf.slice(tf.random_shuffle(features), [0, 0], [k, -1]))
-# expanded_features = tf.expand_dims(features, 0)
-# expanded_centroides = tf.expand_dims(centroides, 1)
-# assignments = tf.argmin(tf.reduce_sum(tf.square(tf.subtract(expanded_features, expanded_centroides)), 2), 0)
-# means = tf.concat(axis=0, values=[
-#     tf.reduce_mean(tf.gather(features, tf.reshape(tf.where(tf.equal(assignments, c)), [1, -1])), 1) for c in range(k)])
-#
-# update_centroides = tf.assign(centroides, means)
-#
-# y = tf.placeholder('float')
-# # We create a session to use the graph
-# sess = tf.Session()
-# sess.run(tf.global_variables_initializer())
-#
-# for step in range(150):
-#     _, centroid_values, assignment_values = sess.run([update_centroides, centroides, assignments])
-#     if step % 10 == 0:
-#         print('step %d, new centroides is' % step, centroid_values)
-#
-# result = np.reshape(assignment_values, [row_num, col_num])
-# np.savetxt('lzb_P2l.result.txt', result)
-# plt.imshow(result)
-# plt.show()
 n_clusters = 6
 print("Learning the clusters.")
 from sklearn.cluster import KMeans
